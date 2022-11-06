@@ -1,6 +1,6 @@
 import React from "react";
 import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 
 import Typography from "@mui/material/Typography";
 import TextField from "@mui/material/TextField";
@@ -31,7 +31,9 @@ export const Login = () => {
     dispatch(fetchAuth(values));
   };
 
-  console.log(errors, isValid);
+  if (isAuth) {
+    return <Navigate to="/" />;
+  }
 
 
   return (
