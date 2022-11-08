@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
@@ -23,7 +23,23 @@ export const Home = () => {
     dispatch(fetchPosts());
     dispatch(fetchTags());
   }, []);
-
+  // const [items, setItems] = useState()
+  // useEffect(() => {
+  //   const options = {
+  //     method: 'GET',
+  //     url: 'https://dummyapi.io/data/v1/comment',
+  //     headers: {
+  //       "app-id": "636ab2e85895315693340c2b"
+  //     }
+  //   };
+  
+  //   axios.request(options).then(function (response) {
+  //     setItems(response.data)
+  //     console.log(response.data);
+  //   }).catch(function (error) {
+  //     console.error(error);
+  //   });
+  //   }, [])
   
 
   return (
@@ -45,7 +61,7 @@ export const Home = () => {
                 user={obj.user}
                 createdAt={obj.createdAt}
                 viewsCount={obj.viewsCount}
-                commentsCount={3}
+                commentsCount={20}
                 tags={obj.tags}
                 isEditable={userData?._id === obj.user._id}
               />
@@ -55,18 +71,19 @@ export const Home = () => {
         <Grid xs={4} item>
           <TagsBlock items={tags.items} isLoading={isTagsLoading} />
           <CommentsBlock
+          
             items={[
               {
                 user: {
-                  fullName: 'Вася Пупкин',
-                  avatarUrl: 'https://mui.com/static/images/avatar/1.jpg',
+                  fullName: 'Yerkanatova Tamila',
+                  avatarUrl: 'https://preview.redd.it/v0caqchbtn741.jpg?auto=webp&s=c5d05662a039c031f50032e22a7c77dfcf1bfddc',
                 },
-                text: 'Это тестовый комментарий',
+                text: 'Good article btw<3',
               },
               {
                 user: {
-                  fullName: 'Иван Иванов',
-                  avatarUrl: 'https://mui.com/static/images/avatar/2.jpg',
+                  fullName: 'Saduakas Aizhan',
+                  avatarUrl: 'https://pub-static.fotor.com/assets/projects/pages/d5bdd0513a0740a8a38752dbc32586d0/fotor-03d1a91a0cec4542927f53c87e0599f6.jpg',
                 },
                 text: 'When displaying three lines or more, the avatar is not aligned at the top. You should set the prop to align the avatar at the top',
               },

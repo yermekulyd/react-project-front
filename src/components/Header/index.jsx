@@ -12,7 +12,7 @@ export const Header = () => {
   const isAuth = useSelector(selectIsAuth);
 
   const onClickLogout = () => {
-    if(window.confirm('Вы дейтсивительно хотите выйти?')) {
+    if(window.confirm('Вы действительно хотите выйти?')) {
       dispatch(logout());
       window.localStorage.removeItem('token');
     }
@@ -23,7 +23,7 @@ export const Header = () => {
       <Container maxWidth="lg">
         <div className={styles.inner}>
           <Link className={styles.logo} to="/">
-            <div>YBlog</div>
+            <div>Baerice's Blog</div>
           </Link>
           <div className={styles.buttons}>
             {isAuth ? (

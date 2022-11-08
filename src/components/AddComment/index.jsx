@@ -7,12 +7,13 @@ import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 
 export const Index = () => {
+  
   return (
     <>
       <div className={styles.root}>
         <Avatar
           classes={{ root: styles.avatar }}
-          src="https://mui.com/static/images/avatar/5.jpg"
+          src="https://thypix.com/wp-content/uploads/2021/11/sponge-bob-profile-picture-thypix-m.jpg"
         />
         <div className={styles.form}>
           <TextField
