@@ -10,7 +10,7 @@ import List from "@mui/material/List";
 import Skeleton from "@mui/material/Skeleton";
 import axios from "axios";
 
-export const CommentsBlock = ({ children, isLoading = true }) => {
+export const CommentsBlock = ({ myComments,children, isLoading = true }) => {
   const [items, setItems] = useState()
   const [loading, setLoading] = useState(false)
   useEffect(() => {
@@ -32,7 +32,11 @@ export const CommentsBlock = ({ children, isLoading = true }) => {
       });
     }
     request()
+    
   }, [])
+  useEffect(() => {
+    console.log("My commets: ", myComments)
+  }, [myComments])
   return (
     <SideBlock title="Комментарии">
       {
@@ -63,6 +67,31 @@ export const CommentsBlock = ({ children, isLoading = true }) => {
                 <Divider variant="inset" component="li" />
               </React.Fragment>
             ))}
+            {
+              myComments && myComments.map((comment, index) => (
+                <React.Fragment key={index}>
+                  <ListItem alignItems="flex-start">
+                    <ListItemAvatar>
+                      
+                    <Avatar alt={'Alter'} src='https://thypix.com/wp-content/uploads/2021/11/sponge-bob-profile-picture-thypix-m.jpg' />
+                      
+                    </ListItemAvatar>
+                    {isLoading ? (
+                      <div style={{ display: "flex", flexDirection: "column" }}>
+                        <Skeleton variant="text" height={25} width={120} />
+                        <Skeleton variant="text" height={18} width={230} />
+                      </div>
+                    ) : (
+                      <ListItemText
+                        primary={'Tursynbek'}
+                        secondary={comment}
+                      />
+                    )}
+                  </ListItem>
+                  <Divider variant="inset" component="li" />
+              </React.Fragment>
+              ))
+            }
           </List>
         )
       }

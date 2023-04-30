@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import ReactMarkdown from 'react-markdown'
 import axios from "../axios";
@@ -9,11 +9,11 @@ import { CommentsBlock } from "../components/CommentsBlock";
 
 
 export const FullPost = () => {
-  const [data, setData] = React.useState();
-  const [isLoading, setLoading] = React.useState(true);
+  const [data, setData] = useState();
+  const [isLoading, setLoading] = useState(true);
   const { id } = useParams();
-
-  React.useEffect(() => {
+  const [myComments, setMyComments] = useState()
+  useEffect(() => {
     axios
       .get(`/posts/${id}`)
       .then(res => {
@@ -24,12 +24,16 @@ export const FullPost = () => {
         console.warn(err);
         alert('Ошибка при получении статьи');
       })
+    setMyComments(JSON.parse(localStorage.getItem('comments')))
   }, []);
+  useEffect(() => {
+    console.log("My comments: ", myComments)
+  }, [myComments])
 
   if (isLoading) {
     return <Post isLoading={isLoading} isFullPost />;
   }
-
+  
   return (
     <>
       <Post
@@ -45,6 +49,7 @@ export const FullPost = () => {
         <ReactMarkdown children={data.text} />
       </Post>
       <CommentsBlock
+        myComments={myComments}
         items={[
           {
             user: {
@@ -62,7 +67,7 @@ export const FullPost = () => {
           },
         ]}
         isLoading={false}
-      ><Index />
+      ><Index setMyComments={setMyComments} />
       </CommentsBlock>
     </>
   );
